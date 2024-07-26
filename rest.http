@@ -15,7 +15,17 @@ Content-Type: application/json
 ###student user
 GET {{rootAPI}}
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBnbWFpbC5jb20iLCJpYXQiOjE3MjEzNTU3MDksImV4cCI6MTcyMTM1NjYwOX0.IFyUg3URo4IlByWdcf4ZFOAMjrTYLRBj5nVpME665Dk
+
+
 ###create new students account
 POST {{rootAPI}}
+Content-Type: application/json
 
+{
+    "fname":"van",
+    "lname":"b",
+    "email":"darshi@gmail.com",
+    "phone":"452392",
+    "password":"12345"
+}
 ### 

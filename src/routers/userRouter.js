@@ -5,6 +5,16 @@ import { loginValidation, newUserValidation } from '../middlewares/joiValidation
 import {  signJWTs } from '../utils/jwtHelper.js';
 import { userAuth } from '../middlewares/authMiddleware.js';
 const router= express.Router()
+router.post("/", (req, res, next) => {
+    try {
+      res.json({
+        status: "success",
+        message: "to do create new user user",
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
 router.post("/login", loginValidation, async(req, res, next)=>{
     try {
@@ -73,8 +83,10 @@ router.get("/", userAuth, (req, res, next)=>{
       return  res.json({
         status:"success",
         message:"Here is the user Info",
-      user:req.userInfo,
+      user: req.userInfo,
+     
        }) 
+      
     } catch (error) {
         next(error)
     }

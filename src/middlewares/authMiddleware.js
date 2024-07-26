@@ -16,20 +16,19 @@ try {
         if(user?._id){
          user.password=undefined;
          req.userInfo= user;
-         next();
+         return  next();
     }
      }
     }
- next({
-    message:"invalid token, unauthorized",
-    errorCode:403,
-
- })
+ 
+    throw new Error("invalid token, unauthorized")
 
    //validate accessJWT is valid
 } catch (error) {
+   error.errorCode=401;
+
     if(error.message.includes("jwt expired")){
-        error.errorCode=401;
+        error.errorCode=403;
     }
 }
 }
