@@ -22,8 +22,10 @@ connectDb()
  //api endpoints
 
  import userRouter from './src/routers/userRouter.js'
+ import bookRouter from './src/routers/bookRouter.js'
 
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/books", bookRouter)
  app.get("/", (req, res)=>{
     res.json({
         status:"success",

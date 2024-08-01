@@ -1,5 +1,33 @@
 import Joi from 'joi'
 
+const SHORTSTR=  Joi.string()
+const SHORTSTRREQUIRED=  Joi.string().required()
+const LONGSTR=  Joi.string().max(500)
+const LONGSTRREQUIRED=  Joi.string().max(5000).required()
+const NUMBERREQUIRED=  Joi.number()
+
+
+export const validationProcessor= (schemaObj, req, res, next)=>{
+    try {
+        // model what your validation is
+        
+        const schema=Joi.object(schemaObj)
+     
+         const {error}= schema.validate(req.body) 
+        if(error){
+         return res.json({
+             status:"error",
+             message:error.message,
+         })
+        }
+        next();
+     
+         } catch (error) {
+            console.log(error)
+         }
+}
+
+
 
 export const newUserValidation= (req, res, next)=>{
     try {
@@ -50,3 +78,19 @@ export const loginValidation= (req, res, next)=>{
        console.log(error)
     }
 }
+
+//===books====
+
+export const newBookValidation= (req, res, next)=>{
+
+    const schemaObj={ 
+        thumbnail:LONGSTRREQUIRED,
+        name:SHORTSTRREQUIRED,
+        author:SHORTSTRREQUIRED,
+        publishYear:NUMBERREQUIRED,
+        isbn:SHORTSTRREQUIRED,
+        description:LONGSTRREQUIRED
+    }
+     validationProcessor(schemaObj, req, res, next)
+}
+

@@ -1,4 +1,6 @@
 @rootAPI =http://localhost:8000/api/v1/users
+@bookAPI =http://localhost:8000/api/v1/books
+
 
 ###admin user===
 POST {{rootAPI}}/admin-user 
@@ -12,20 +14,42 @@ Content-Type: application/json
     "password":"12345"
 }
 
+### Login user
+POST {{rootAPI}}/login
+Content-Type: application/json
+
+{
+    "email":"adi@gmail.com",
+    "password":"1234"
+}
+
 ###student user
 GET {{rootAPI}}
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBnbWFpbC5jb20iLCJpYXQiOjE3MjEzNTU3MDksImV4cCI6MTcyMTM1NjYwOX0.IFyUg3URo4IlByWdcf4ZFOAMjrTYLRBj5nVpME665Dk
 
 
-###create new students account
-POST {{rootAPI}}
-Content-Type: application/json
+###request new accessJWT for user
+GET {{rootAPI}}/get-accessjwt
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBnbWFpbC5jb20iLCJpYXQiOjE3MjIzMDA1MzgsImV4cCI6MTcyNDg5MjUzOH0.yp0FtF8StEx78X0M9zmYNt4ZagO-EKgNq0JKQ8vAhM0
 
-{
-    "fname":"van",
-    "lname":"b",
-    "email":"darshi@gmail.com",
-    "phone":"452392",
-    "password":"12345"
-}
-### 
+
+#====== book API
+
+###get all books
+GET {{bookAPI}}
+
+
+###post new book
+POST {{bookAPI}}
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBnbWFpbC5jb20iLCJpYXQiOjE3MjI0OTM2NTEsImV4cCI6MTcyMjQ5NDU1MX0.iHPTKrfaxfA6f_AdiuUXdEiAGFC5B3NIHBz1pHUN-9Y
+
+{ 
+    "thumbnail":"https://m.media-amazon.com/images/I/81HqVRRwp3L._AC_UF1000,1000_QL80_.jpg",
+        "name":"Eloquent JavaScript",
+        "author":"Marijn Haverbeke",
+        "publishYear":"2018",
+        "isbn":"9781593272",
+        "description":"Completely revised and updated, this best-selling introduction to programming in JavaScript focuses on writing real applications. JavaScript lies at the heart of almost every modern web application, from social apps like Twitter to browser-based game frameworks like Phaser and Babylon. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications. This much anticipated and thoroughly revised third edition of Eloquent JavaScript dives deep into the JavaScript language to show you how to write beautiful, effective code. It has been updated to reflect the current state of Java¬Script and web browsers and includes brand-new material on features like class notation, arrow functions, iterators, async function"
+        }
+

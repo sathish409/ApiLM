@@ -1,9 +1,10 @@
 import express from 'express';
-import { createUser, getUserByEmail } from '../model/userModel.js';
+import { createUser, getUserByEmail, updateRefreshJWTByEmail } from '../model/userModel.js';
 import { comparePassword, hashPassword } from '../utils/bcryptjs.js';
 import { loginValidation, newUserValidation } from '../middlewares/joiValidation.js';
 import {  signJWTs } from '../utils/jwtHelper.js';
-import { userAuth } from '../middlewares/authMiddleware.js';
+import { refreshAuth, userAuth } from '../middlewares/authMiddleware.js';
+import { deleteSession } from '../model/session/SessionModel.js';
 const router= express.Router()
 router.post("/", (req, res, next) => {
     try {
@@ -44,6 +45,28 @@ if(isMatched){
 res.json({
     status:"error",
     message:"invalid login details",
+   }) 
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.post("/logout", async(req, res, next)=>{
+    try {
+    const {accessJWT, email}=req.body
+
+    //delete from session table
+    accessJWT && (await deleteSession({accessJWT}))
+
+  //update from user table
+    email &&  ( await updateRefreshJWTByEmail(email, ""))
+
+
+    
+    
+res.json({
+    status:"success",
+    message:"logout successfully",
    }) 
     } catch (error) {
         next(error)
@@ -114,4 +137,8 @@ router.patch("/", (req, res, next)=>{
         next(error)
     }
 })
+
+router.get("/get-accessjwt", refreshAuth)
+
+
 export default router;
