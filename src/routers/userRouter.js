@@ -1,9 +1,9 @@
 import express from 'express';
-import { createUser, getUserByEmail, updateRefreshJWTByEmail } from '../model/userModel.js';
+import { createUser, getManyStudents, getUserByEmail, updateRefreshJWTByEmail } from '../model/userModel.js';
 import { comparePassword, hashPassword } from '../utils/bcryptjs.js';
 import { loginValidation, newUserValidation } from '../middlewares/joiValidation.js';
 import {  signJWTs } from '../utils/jwtHelper.js';
-import { refreshAuth, userAuth } from '../middlewares/authMiddleware.js';
+import { adminAuth, refreshAuth, userAuth } from '../middlewares/authMiddleware.js';
 import { deleteSession } from '../model/session/SessionModel.js';
 const router= express.Router()
 router.post("/", (req, res, next) => {
@@ -127,18 +127,24 @@ router.delete("/", (req, res, next)=>{
     }
 })
 
-router.patch("/", (req, res, next)=>{
+router.get("/all-users", adminAuth, async(req, res, next)=>{
+
     try {
-       res.json({
+
+        const users = await getManyStudents()
+      return  res.json({
         status:"success",
-        message:"from patch",
+        message:"Here is the students Info",
+        users,
+     
        }) 
+      
     } catch (error) {
         next(error)
     }
 })
 
-router.get("/get-accessjwt", refreshAuth)
+router.get("/get-accessjwt", refreshAuth);
 
 
 export default router;

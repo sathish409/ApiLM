@@ -94,3 +94,32 @@ export const newBookValidation= (req, res, next)=>{
      validationProcessor(schemaObj, req, res, next)
 }
 
+export const updateBookValidation= (req, res, next)=>{
+
+    const schemaObj={ 
+        status:SHORTSTRREQUIRED,
+        _id:SHORTSTRREQUIRED,
+        thumbnail:LONGSTRREQUIRED,
+        name:SHORTSTRREQUIRED,
+        author:SHORTSTRREQUIRED,
+        publishYear:NUMBERREQUIRED,
+        description:LONGSTRREQUIRED
+    }
+     validationProcessor(schemaObj, req, res, next)
+}
+
+
+//======burrow validation
+
+export const newBurrowValidation= (req, res, next)=>{
+
+    const schemaObj={ 
+        bookId:SHORTSTRREQUIRED,
+        bookName:SHORTSTRREQUIRED,
+        thumbnail:LONGSTRREQUIRED,
+        userId:SHORTSTRREQUIRED,
+        userName:SHORTSTRREQUIRED,
+    
+    }
+     validationProcessor(schemaObj, req, res, next)
+}

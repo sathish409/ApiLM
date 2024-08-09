@@ -32,4 +32,19 @@ export const updateRefreshJWT= async(email, refreshJWT)=>{
     return await userSchema.findOneAndUpdate({email}, {refreshJWT})
 }
 
-//update
+//get all students 
+
+export const getManyStudents=async()=>{
+
+    const selectedProporties = {
+        _id: 1,
+      status: 1,
+      role: 1,
+      fname:1, 
+      lname: 1,
+      email: 1,
+      phone: 1,
+      createdAt: 1,
+    }
+    return await userSchema.find({}, selectedProporties)
+}

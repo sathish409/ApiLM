@@ -23,9 +23,13 @@ connectDb()
 
  import userRouter from './src/routers/userRouter.js'
  import bookRouter from './src/routers/bookRouter.js'
-
+ import burrowRouter from './src/routers/burrowRouter.js'
+import { userAuth } from './src/middlewares/authMiddleware.js';
+ 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/books", bookRouter)
+app.use("/api/v1/burrow", userAuth, burrowRouter)
+
  app.get("/", (req, res)=>{
     res.json({
         status:"success",

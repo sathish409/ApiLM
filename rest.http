@@ -38,6 +38,16 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBnbWFpbC5jb
 ###get all books
 GET {{bookAPI}}
 
+###get a book
+GET {{bookAPI}}/66a8c32651ea091f8d03955a
+
+
+
+###get all students
+GET {{rootAPI}}/all-users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBnbWFpbC5jb20iLCJpYXQiOjE3MjMxNjU3ODcsImV4cCI6MTcyMzE2NjY4N30.Js3o8bSivhsIYl5NSYtTcoaXwKjBEzsnp-JEfkwEu80
+
+
 
 ###post new book
 POST {{bookAPI}}
